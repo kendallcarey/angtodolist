@@ -13,10 +13,12 @@
     </form>
     <section id="main" ng-show="todos.length" ng-cloak>
       <ul>
-        <li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-          <label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
-          <button class="destroy" ng-click="removeTodo(todo)">delete</button>
+        <li id="todo{{todo.id}}" ng-repeat="todo in todos" ng-dblclick="editTodo(todo)">
+          <p ng-hide="todo.editing">{{todo.title}}</p>
+          <form ngsubmit='submitEdit()' ng-show="todo.editing">
+            <input ng-model='editText' type='text' value='{{todo.title}}' />
           </form>
+          <button class="destroy" ng-click="removeTodo(todo)">delete</button>
         </li>
       </ul>
     </div>

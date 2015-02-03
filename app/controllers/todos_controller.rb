@@ -10,8 +10,12 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    todo = Todo.find(params[:id])
-    todo.destroy
+    Todo.find(params[:id]).destroy
+  end
+
+  def update
+    todo = Todo.find_by_id(params[:id])
+    todo.update_attributes(todo_params)
   end
 
   def todo_params
